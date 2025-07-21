@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verto Campus Copilot Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="d-flex justify-content-center align-items-center position-fixed w-100 h-100" style="z-index: 9999; top: 0; left: 0;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Dashboard Container -->
+  <div class="dashboard-container">
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="sidebar-brand">
+          <i class="fas fa-graduation-cap"></i>
+          Verto
+        </a>
+        <div class="theme-toggle">
+          <button class="toggle-btn">
+            <i class="fas fa-moon"></i>
+            <span class="toggle-text">Dark Mode</span>
+          </button>
+        </div>
+      </div>
+      
+      <ul class="sidebar-menu">
+        <!-- Main Dashboard -->
+        <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+        
+        <!-- Academic Section -->
+        <li class="menu-section">
+          <span class="section-title">Academic</span>
+        </li>
+        <li><a href="#"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+        <li><a href="#"><i class="fas fa-tasks"></i> Assignments</a></li>
+        <li><a href="#"><i class="fas fa-calendar-check"></i> Events</a></li>
+        <li><a href="#"><i class="fas fa-book-open"></i> Resources</a></li>
+        
+        <!-- Campus Life Section -->
+        <li class="menu-section">
+          <span class="section-title">Campus</span>
+        </li>
+        <li><a href="#"><i class="fas fa-users"></i> Study Groups</a></li>
+        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Campus Map</a></li>
+        <li><a href="#"><i class="fas fa-utensils"></i> Mess Menu</a></li>
+        
+        <!-- Tools Section -->
+        <li class="menu-section">
+          <span class="section-title">Tools</span>
+        </li>
+        <li><a href="#"><i class="fas fa-robot"></i> AI Assistant</a></li>
+        <li><a href="#"><i class="fas fa-sync-alt"></i> Sync</a></li>
+        <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+      </ul>
+      
+      <div class="sidebar-footer">
+  <div class="user-info">
+    <div class="user-avatar" id="sidebar-avatar">R</div>
+    <div>
+      <div class="user-name" id="sidebar-name">Russell</div>
+      <div class="user-role" id="sidebar-role">Bsc I.T.</div>
+    </div>
+  </div>
+</div>
+        <!-- Logout Section -->
+        <ul class="sidebar-menu logout-section">
+          <li><a href="index.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- ===== SIDEBAR TOGGLE BUTTON ===== -->
+    <button id="sidebarToggle" class="sidebar-toggle-btn">
+      <i class="fas fa-angle-right"></i>
+    </button>
+    
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content" id="mainContent">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="hero-content">
+          <div class="welcome-message">
+<h1 id="welcome-title">Welcome back, Russell 👋</h1>
+            <p>Your classes and events are synced and ready! You have 2 classes and 1 assignment due today.</p>
+          </div>
+          <div class="user-info">
+<div class="user-avatar notification-pulse" id="user-avatar">R</div>
+            <div>
+<div class="user-name" id="user-name">Russell</div>
+              <div class="user-role">Bsc I.T.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stats Cards -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <div class="stat-value">4</div>
+          <div class="stat-title">Today's Classes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-tasks"></i>
+          </div>
+          <div class="stat-value">2</div>
+          <div class="stat-title">Pending Assignments</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="stat-value">3</div>
+          <div class="stat-title">Upcoming Events</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-sync-alt"></i>
+          </div>
+          <div class="stat-value">100%</div>
+          <div class="stat-title">Schedule Synced</div>
+        </div>
+      </div>
+      
+      <!-- Academic Performance Section -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3 class="section-title">Academic Performance</h3>
+          <a href="#" class="view-all">View Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="performance-container">
+          <!-- Attendance Card -->
+          <div class="performance-card">
+            <div class="performance-header">
+              <h4 class="performance-title"><i class="fas fa-user-check"></i> Attendance</h4>
+              <div class="trend-up"><i class="fas fa-arrow-up"></i> 5%</div>
+            </div>
+            <div class="chart-container">
+              <canvas id="attendanceChart"></canvas>
+            </div>
+            <div class="performance-stats">
+              <div class="stat-item">
+                <div class="stat-value">85%</div>
+                <div class="stat-label">Overall</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">92%</div>
+                <div class="stat-label">This Month</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- CGPA Card -->
+          <div class="performance-card">
+            <div class="performance-header">
+              <h4 class="performance-title"><i class="fas fa-chart-line"></i> CGPA</h4>
+              <div class="trend-up"><i class="fas fa-arrow-up"></i> 0.2</div>
+            </div>
+            <div class="chart-container">
+              <canvas id="cgpaChart"></canvas>
+            </div>
+            <div class="performance-stats">
+              <div class="stat-item">
+                <div class="stat-value">8.2</div>
+                <div class="stat-label">Current</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">8.0</div>
+                <div class="stat-label">Previous</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Course Grades Card -->
+          <div class="performance-card">
+            <div class="performance-header">
+              <h4 class="performance-title"><i class="fas fa-book"></i> Course Grades</h4>
+              <div class="trend-neutral">Stable</div>
+            </div>
+            <div class="course-list">
+              <div class="course-item">
+                <span class="course-name">Database Management</span>
+                <span class="course-grade">A+</span>
+              </div>
+              <div class="course-item">
+                <span class="course-name">Data Structures</span>
+                <span class="course-grade">A</span>
+              </div>
+              <div class="course-item">
+                <span class="course-name">Operating Systems</span>
+                <span class="course-grade">B+</span>
+              </div>
+              <div class="course-item">
+                <span class="course-name">Computer Networks</span>
+                <span class="course-grade">A-</span>
+              </div>
+              <div class="course-item">
+                <span class="course-name">Software Engineering</span>
+                <span class="course-grade">A</span>
+              </div>
+              <div class="course-item">
+                <span class="course-name">AI Fundamentals</span>
+                <span class="course-grade">B+</span>
+              </div>
+            </div>
+            <div class="performance-stats">
+              <div class="stat-item">
+                <div class="stat-value">3.7</div>
+                <div class="stat-label">TGPA</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">86%</div>
+                <div class="stat-label">Completion</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Calendar Section -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3 class="section-title">Academic Calendar</h3>
+          <a href="#" class="view-all" data-bs-toggle="modal" data-bs-target="#eventModal">
+            Add Event <i class="fas fa-plus"></i>
+          </a>
+        </div>
+        
+        <div class="calendar-container">
+          <div class="calendar-controls">
+            <div class="calendar-nav">
+              <button class="calendar-btn" id="prevMonth">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="calendar-btn" id="nextMonth">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+            <div class="calendar-month" id="currentMonth">July 2025</div>
+            <div>
+              <button class="calendar-btn" id="syncCalendar">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="calendar-main">
+            <div class="calendar-grid">
+              <div class="calendar-header">Sun</div>
+              <div class="calendar-header">Mon</div>
+              <div class="calendar-header">Tue</div>
+              <div class="calendar-header">Wed</div>
+              <div class="calendar-header">Thu</div>
+              <div class="calendar-header">Fri</div>
+              <div class="calendar-header">Sat</div>
+              
+              <!-- Calendar days -->
+              <div class="calendar-day" data-date="2025-07-01">
+                <div class="day-number">1</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-02">
+                <div class="day-number">2</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-03">
+                <div class="day-number">3</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-04">
+                <div class="day-number">4</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-05">
+                <div class="day-number">5</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-06">
+                <div class="day-number">6</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-07">
+                <div class="day-number">7</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-08">
+                <div class="day-number">8</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-09">
+                <div class="day-number">9</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-10">
+                <div class="day-number">10</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-11">
+                <div class="day-number">11</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-12">
+                <div class="day-number">12</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-13">
+                <div class="day-number">13</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-14">
+                <div class="day-number">14</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-15">
+                <div class="day-number">15</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-16">
+                <div class="day-number">16</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-17">
+                <div class="day-number">17</div>
+                <div class="calendar-event">
+                  <div class="event-title">DSA Quiz</div>
+                  <span class="event-type event-deadline">Quiz</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-18">
+                <div class="day-number">18</div>
+                <div class="calendar-event">
+                  <div class="event-title">Hackathon Prep</div>
+                  <span class="event-type event-club">Club</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-19">
+                <div class="day-number">19</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-20">
+                <div class="day-number">20</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-21">
+                <div class="day-number">21</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-22">
+                <div class="day-number">22</div>
+                <div class="calendar-event">
+                  <div class="event-title">Tech Fest</div>
+                  <span class="event-type event-club">Event</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-23">
+                <div class="day-number">23</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-24">
+                <div class="day-number">24</div>
+                <div class="calendar-event">
+                  <div class="event-title">OS Assignment Due</div>
+                  <span class="event-type event-deadline">Assignment</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-25">
+                <div class="day-number">25</div>
+                <div class="calendar-event">
+                  <div class="event-title">Career Fair</div>
+                  <span class="event-type event-club">Event</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-26">
+                <div class="day-number">26</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-27">
+                <div class="day-number">27</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-28">
+                <div class="day-number">28</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-29">
+                <div class="day-number">29</div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-30">
+                <div class="day-number">30</div>
+                <div class="calendar-event">
+                  <div class="event-title">Fees Due</div>
+                  <span class="event-type event-deadline">Deadline</span>
+                </div>
+              </div>
+              <div class="calendar-day" data-date="2025-07-31">
+                <div class="day-number">31</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Schedule and Notifications Section -->
+      <div class="combined-section">
+        <!-- Today's Schedule Card -->
+        <div class="combined-card">
+          <h3><i class="fas fa-calendar-day"></i> Today's Schedule</h3>
+          <ul class="schedule-list">
+            <li class="schedule-item">
+              <div class="schedule-time">09:00 AM - 10:30 AM</div>
+              <div class="schedule-title">Database Management Systems</div>
+              <div class="schedule-location">
+                <i class="fas fa-map-marker-alt"></i> Block 38, Room 405
+              </div>
+            </li>
+            <li class="schedule-item">
+              <div class="schedule-time">11:00 AM - 12:30 PM</div>
+              <div class="schedule-title">Data Structures & Algorithms</div>
+              <div class="schedule-location">
+                <i class="fas fa-map-marker-alt"></i> Block 32, Room 210
+              </div>
+            </li>
+            <li class="schedule-item">
+              <div class="schedule-time">02:00 PM - 03:30 PM</div>
+              <div class="schedule-title">Operating Systems</div>
+              <div class="schedule-location">
+                <i class="fas fa-map-marker-alt"></i> Block 36, Room 315
+              </div>
+            </li>
+            <li class="schedule-item">
+              <div class="schedule-time">06:00 PM - 08:00 PM</div>
+              <div class="schedule-title">Hackathon Prep Meeting</div>
+              <div class="schedule-location">
+                <i class="fas fa-map-marker-alt"></i> Innovation Lab
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Notifications Card -->
+        <div class="combined-card">
+          <h3><i class="fas fa-bell"></i> Notifications</h3>
+          <ul class="notification-list">
+            <li class="notification-item">
+              <div class="notification-title">Assignment Deadline Approaching</div>
+              <p>DBMS Assignment 2 is due this Friday. Don't forget to submit!</p>
+              <div class="notification-time">2 hours ago</div>
+            </li>
+            <li class="notification-item">
+              <div class="notification-title">Fees Payment Reminder</div>
+              <p>Semester fees due by 30th July. Pay now to avoid late fees.</p>
+              <div class="notification-time">5 hours ago</div>
+            </li>
+            <li class="notification-item">
+              <div class="notification-title">Class Room Change</div>
+              <p>Today's OS class moved to Block 36, Room 315.</p>
+              <div class="notification-time">Yesterday</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Upcoming Events Section -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3 class="section-title">Upcoming Events</h3>
+          <a href="#" class="view-all">View All Events <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="events-grid">
+          <!-- Event Card 1 -->
+          <div class="event-card">
+            <div class="event-card-date">22</div>
+            <h4 class="event-card-title">Tech Fest 2025</h4>
+            <div class="event-card-time">
+              <i class="fas fa-clock"></i> 9:00 AM - 5:00 PM
+            </div>
+            <div class="event-card-location">
+              <i class="fas fa-map-marker-alt"></i> University Grounds
+            </div>
+            <p class="event-card-description">
+              Annual technology festival with competitions, workshops, and guest speakers from top tech companies.
+            </p>
+            <div class="event-card-actions">
+              <button class="btn-event">Join Event</button>
+              <button class="btn-event btn-outline-event">Add to Calendar</button>
+            </div>
+          </div>
+          
+          <!-- Event Card 2 -->
+          <div class="event-card">
+            <div class="event-card-date">25</div>
+            <h4 class="event-card-title">Career Fair</h4>
+            <div class="event-card-time">
+              <i class="fas fa-clock"></i> 10:00 AM - 4:00 PM
+            </div>
+            <div class="event-card-location">
+              <i class="fas fa-map-marker-alt"></i> Convention Center
+            </div>
+            <p class="event-card-description">
+              Meet top companies and explore internship opportunities. Bring your resume and dress professionally.
+            </p>
+            <div class="event-card-actions">
+              <button class="btn-event">Register Now</button>
+              <button class="btn-event btn-outline-event">More Info</button>
+            </div>
+          </div>
+          
+          <!-- Event Card 3 -->
+          <div class="event-card">
+            <div class="event-card-date">28</div>
+            <h4 class="event-card-title">AI in Modern Applications</h4>
+            <div class="event-card-time">
+              <i class="fas fa-clock"></i> 2:00 PM - 4:00 PM
+            </div>
+            <div class="event-card-location">
+              <i class="fas fa-map-marker-alt"></i> Block 42, Auditorium
+            </div>
+            <p class="event-card-description">
+              Guest lecture by Dr. Smith from Tech Innovations Inc. Learn about real-world AI implementations.
+            </p>
+            <div class="event-card-actions">
+              <button class="btn-event">RSVP</button>
+              <button class="btn-event btn-outline-event">Share</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sync Section -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3 class="section-title">Sync Your Schedule</h3>
+          <a href="#" class="view-all">Sync History <i class="fas fa-history"></i></a>
+        </div>
+        
+        <div class="sync-options">
+          <div class="sync-card">
+            <div class="sync-icon">
+              <i class="fas fa-university"></i>
+            </div>
+            <h4>LPU Class Schedule</h4>
+            <p>Automatically sync your official class timetable from LPU portal</p>
+            <button class="sync-btn">Sync Now</button>
+          </div>
+          
+          <div class="sync-card">
+            <div class="sync-icon">
+              <i class="fas fa-calendar"></i>
+            </div>
+            <h4>Google Calendar</h4>
+            <p>Connect to Google Calendar to view all events in one place</p>
+            <button class="sync-btn">Connect</button>
+          </div>
+          
+          <div class="sync-card">
+            <div class="sync-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <h4>Notification Sync</h4>
+            <p>Get reminders for classes, assignments, and events</p>
+            <button class="sync-btn">Configure</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- How Calendar Sync Works -->
+      <div class="dashboard-section">
+        <div class="section-header">
+          <h3 class="section-title">How Calendar Sync Works</h3>
+        </div>
+        
+        <div class="how-it-works">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h4>Connect to LPU Portal</h4>
+            <p>Securely connect your Verto account to the LPU student portal with your credentials.</p>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h4>Automatic Schedule Import</h4>
+            <p>Verto automatically imports your class schedule each semester and keeps it updated.</p>
+          </div>
+          
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h4>Smart Reminders</h4>
+            <p>Receive notifications 15 minutes before classes and 24 hours before deadlines.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- ===== FOOTER ===== -->
+      <footer>
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-col">
+              <h3>Verto</h3>
+              <p>The ultimate campus copilot for LPU students, designed to simplify your academic journey and enhance campus life.</p>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h3>Quick Links</h3>
+              <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+                <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h3>Features</h3>
+              <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Timetable Sync</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Campus Notifications</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> AI Assistant</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Study Groups</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Resource Hub</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h3>Contact Us</h3>
+              <ul class="footer-links">
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Lovely Professional University, Punjab</a></li>
+                <li><a href="mailto:hello@verto.app"><i class="fas fa-envelope"></i> hello@verto.app</a></li>
+                <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 123 456 7890</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2025 Verto - Your Campus Copilot.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ===== CHATBOT ===== -->
+  <!-- Toggle Button -->
+  <div class="chatbot-toggle" id="chatbotToggle">
+    <i class="fas fa-comment-alt"></i>
+  </div>
+
+  <!-- Chatbot Popup -->
+  <div class="chatbot-popup" id="chatbotPopup">
+    <div class="chatbot-header">
+      <h4>VertoBot</h4>
+      <span id="chatbotClose">&times;</span>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="bot-message">👋 Hello! How can I assist you today?</div>
+    </div>
+    <div class="chatbot-input-area">
+      <input type="text" id="chatInput" placeholder="Type your message..." />
+      <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  
+  <!-- ===== EVENT MODAL ===== -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDate">Add Event</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="eventForm">
+            <div class="form-group">
+              <label for="eventTitle" class="form-label">Event Title</label>
+              <input type="text" class="form-control" id="eventTitle" placeholder="Enter event title" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="eventType" class="form-label">Event Type</label>
+              <select class="form-control" id="eventType" required>
+                <option value="class">Class</option>
+                <option value="assignment">Assignment</option>
+                <option value="exam">Exam</option>
+                <option value="event">Campus Event</option>
+                <option value="reminder">Reminder</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="eventDate" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="eventDate" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="eventTime" class="form-label">Time</label>
+                  <input type="time" class="form-control" id="eventTime">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="eventLocation" class="form-label">Location (Optional)</label>
+              <input type="text" class="form-control" id="eventLocation" placeholder="Enter location">
+            </div>
+            
+            <div class="form-group">
+              <label for="eventDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="eventDescription" rows="3" placeholder="Enter event details"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-submit">Save Event</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
