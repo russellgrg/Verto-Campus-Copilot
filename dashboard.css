@@ -992,6 +992,7 @@
     
     .sidebar.active ~ .sidebar-toggle-btn {
       left: var(--sidebar-width);
+       
     }
     
     /* ===== MODAL ===== */
@@ -1083,7 +1084,7 @@
       bottom: 100px;
       right: 30px;
       width: 300px;
-      background: #fff;
+      background: var(--card-bg);
       border-radius: 15px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
       display: none;
@@ -1118,7 +1119,7 @@
       padding: 15px;
       max-height: 250px;
       overflow-y: auto;
-      background: #f7f7f7;
+      background: var(--bg-secondary);
       font-size: 0.95rem;
       display: flex;
       flex-direction: column;
@@ -1142,10 +1143,15 @@
       text-align: right;
     }
 
+    [data-theme="dark"] .user-message {
+      background: rgba(37, 117, 252, 0.2);
+      color: var(--text-primary);
+    }
+
     /* Input Area */
     .chatbot-input-area {
       display: flex;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid var(--border-color);
     }
 
     .chatbot-input-area input {
@@ -1154,6 +1160,8 @@
       border: none;
       outline: none;
       font-size: 14px;
+      background: var(--input-bg);
+      color: var(--text-primary);
     }
 
     .chatbot-input-area button {

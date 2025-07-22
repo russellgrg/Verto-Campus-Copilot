@@ -22,9 +22,11 @@
       if (sidebar.classList.contains('active')) {
         icon.classList.remove('fa-angle-right');
         icon.classList.add('fa-angle-left');
+        toggleBtn.style.left = '260px';
       } else {
         icon.classList.remove('fa-angle-left');
         icon.classList.add('fa-angle-right');
+        toggleBtn.style.left = '0px';
       }
     });
     
@@ -294,15 +296,6 @@ function generateResponse(message) {
     return "I'm just a simple chatbot 😄. Try asking: 'Where is my class?' or 'What time is my class?'";
   }
 }
-
-// Optional spinner hide if used
-window.addEventListener("load", function () {
-  const spinner = document.getElementById("loadingSpinner");
-  if (spinner) {
-    spinner.classList.add("hide");
-    setTimeout(() => spinner.remove(), 500);
-  }
-});
     
     // ===== DARK MODE TOGGLE =====
     document.addEventListener('DOMContentLoaded', function() {
